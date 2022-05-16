@@ -1,22 +1,27 @@
-name: Build
-description: Sets up ruby and node. Installs node dependencies.
-author: Roberto Welzel Filho <rwelzel@epages.com>
+name: Build Rails
+description: Sets up Rails environment, installing Ruby and Yarn dependencies.
+author: Roberto Welzel Filho <rwelzel@epages.com>, Unai Abrisketa <uabrisketa@epages.com>
 
 inputs:
   ruby_version:
-    description: The ruby version to be used. Defaults to 2.7.5
+    description: The ruby version to be used. Defaults to `3.1.2`.
     required: true
-    default: 2.7.5
+    default: '3.1.2'
   node_version:
-    description: The node version to be used. Defaults to 16
+    description: The node version to be used. Defaults to `18`.
     required: true
-    default: '16'
+    default: '18'
+  bundle_github__com:
+    description: The GitHub access token.
+    required: false
 
 runs:
   using: composite
   steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
+      env:
+        BUNDLE_GITHUB__COM: ${{ inputs.bundle_github__com }}
       with:
         ruby-version: ${{ inputs.ruby_version }}
         bundler-cache: true
