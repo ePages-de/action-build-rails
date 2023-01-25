@@ -7,7 +7,7 @@ GitHub Action for setting up a Rails environment installing Ruby and Yarn depend
 | Name                 | Description                  | Default | Required |
 |----------------------|------------------------------|---------|----------|
 | `ruby_version`       | The ruby version to be used. | `3.1.2` | `true`   |
-| `node_version`       | The node version to be used. | `18`    | `true`   |
+| `node_version`       | The node version to be used. | `nil`   | `false`  |
 | `bundle_github__com` | The GitHub access token.     | `nil`   | `false`  |
 
 ## Usage

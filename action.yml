@@ -8,9 +8,8 @@ inputs:
     required: true
     default: '3.1.2'
   node_version:
-    description: The node version to be used. Defaults to `18`.
-    required: true
-    default: '18'
+    description: The node version to be used.
+    required: false
   bundle_github__com:
     description: The GitHub access token.
     required: false
@@ -25,9 +24,11 @@ runs:
       with:
         ruby-version: ${{ inputs.ruby_version }}
         bundler-cache: true
-    - uses: actions/setup-node@v2
+    - if: ${{ inputs.node_version != '' }}
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ inputs.node_version }}
         cache: yarn
-    - shell: bash
+    - if: ${{ inputs.node_version != '' }}
+      shell: bash
       run: yarn install --production=false
